@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <title>Document</title>
+    </head>
+
+<form id="registrationform">
+    <div class="container">
+      <h1>Register</h1>
+      <label for="fullname"><b>Full Name</b></label>
+      <input type="text" placeholder="Enter Your Full Name" name="fullname" id="fullname" required>
+
+      <label for="email"><b>Email</b></label>
+      <input type="text" placeholder="Enter Email" name="email" id="email" required>
+  
+      <label for="password"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="password" id="password" required>
+  
+      <label for="passwordRepeat"><b>Repeat Password</b></label>
+      <input type="password" placeholder="Repeat Password" name="passwordRepeat" id="passwordRepeat" required>
+  
+      <button type="submit" class="registerbtn">Register</button>
+    </div>
+  
+    <div class="container signin">
+      <p>Or perhaps, just login? <a href=".//login.html">Login</a>.</p>
+    </div>
+  </form>
+
+  <script>
+
+    function handleFormSubmit(event) {
+      event.preventDefault();
+      
+      const data = new FormData(event.target);
+      
+      const formJSON = Object.fromEntries(data.entries());
+    console.log(formJSON);
+    
+      let xhr = new XMLHttpRequest();
+      xhr.open("POST", "http://localhost:3000/register");
+    
+      xhr.setRequestHeader("Accept", "application/json");
+      xhr.setRequestHeader("Content-Type", "application/json");
+    
+      xhr.onload = () => console.log(xhr.responseText);
+    
+      xhr.send(JSON.stringify(formJSON, null, 2));
+    }
+    
+    const form = document.getElementById ('registrationform');
+    form.addEventListener('submit', handleFormSubmit);
+    
+      </script>
